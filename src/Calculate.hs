@@ -1,7 +1,15 @@
+-- |
+-- BGC Calculate Incomes
+--
+-- >>> let min_unit = 10 -- [yen]
+-- >>> let rate = 10 -- [yen/pin]
+-- >>> let scores_list = [[("a", 170), ("b", 180)], [("c", 170), ("d", 210), ("e", 180)], [("f", 184)]]
+-- >>> getResults rate min_unit scores_list
+-- [[("f",90)],[("a",-150),("b",-140)],[("c",60),("d",70),("e",70)]]
 
 module Calculate (getResults, Score, ScoreList, IncomeList) where
 
-import Data.List (sort, sortOn, sortBy, minimumBy)
+import Data.List (sortOn, sortBy)
 -- import Debug.Trace
 
 getResults :: Int -> Int -> [ScoreList] -> [IncomeList]
@@ -74,6 +82,7 @@ getScale :: Int -> [ScoreList] -> Double
 getScale target team_scores =   fromIntegral (maximum num_list)
                               * fromIntegral (target * sum num_list)
                               / fromIntegral (maximum num_list * length num_list)
+                              * 2.0 -- Double the difference from the average
                               where
                                 num_list = map length team_scores
 

@@ -1,6 +1,5 @@
 module Main where
 
--- import qualified Calculate (getResults, Score, ScoreList, IncomeList)
 import qualified Calculate (getResults)
 
 main :: IO ()
